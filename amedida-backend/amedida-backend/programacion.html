@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Medida — Trajes de dama y caballero, hechos a tu forma</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --bg:#FAF7F2; --bg-alt:#F1EAE0; --panel:#FFFFFF;
+  --ink:#2A2622; --ink-soft:#6b6459;
+  --forest:#1F3D2B; --forest-dark:#14261B;
+  --rose:#C97B84; --rose-soft:#EBD3D5;
+  --gold:#B8935F; --line:#DED1C1;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+html,body{background:var(--bg); color:var(--ink); font-family:'Jost',sans-serif; overflow-x:hidden;}
+h1,h2,h3,.display{font-family:'Cormorant Garamond',serif;}
+.mono{font-family:'Space Mono',monospace;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer;}
+ul{list-style:none;}
+img,svg{display:block;}
+
+/* ---------- RULER DIVIDER (signature motif) ---------- */
+.ruler{
+  height:22px; margin:0 auto; max-width:1180px;
+  background: repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px 24px);
+  background-position:center; position:relative; opacity:0.9;
+}
+.ruler::before, .ruler::after{content:''; position:absolute; top:0; bottom:0; width:1px; background:var(--line);}
+.ruler-label{
+  text-align:center; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px;
+  color:var(--ink-soft); text-transform:uppercase; padding:6px 0 34px;
+}
+
+/* ---------- NAV ---------- */
+header{position:sticky; top:0; z-index:60; background:rgba(250,247,242,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--line);}
+.nav-wrap{max-width:1220px; margin:0 auto; padding:16px 28px; display:flex; align-items:center; justify-content:space-between;}
+.brand{display:flex; align-items:center; gap:10px;}
+.brand-mark{width:34px; height:34px; border-radius:50%; border:1.5px solid var(--forest); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:11px; color:var(--forest);}
+.brand-name{font-size:22px; font-weight:600;}
+.brand-name em{font-style:normal; color:var(--rose);}
+nav ul{display:flex; gap:30px; font-size:14.5px;}
+nav ul a:hover{color:var(--forest);}
+.nav-actions{display:flex; align-items:center; gap:16px;}
+.icon-btn{background:none; border:none; font-size:14.5px; color:var(--ink); display:flex; align-items:center; gap:6px; position:relative;}
+.icon-btn:hover{color:var(--rose);}
+.badge{position:absolute; top:-8px; right:-10px; background:var(--rose); color:#fff; font-size:10px; font-family:'Space Mono',monospace; border-radius:50%; width:17px; height:17px; display:flex; align-items:center; justify-content:center;}
+.btn-primary{background:var(--forest); color:#fff; border:none; padding:11px 24px; border-radius:999px; font-size:14px; transition:.2s;}
+.btn-primary:hover{background:var(--forest-dark); transform:translateY(-1px);}
+.btn-outline{background:transparent; border:1px solid var(--forest); color:var(--forest); padding:10px 20px; border-radius:999px; font-size:14px; transition:.2s;}
+.btn-outline:hover{background:var(--forest); color:#fff;}
+.btn-ghost{background:none; border:none; color:var(--ink-soft); font-size:13px; text-decoration:underline;}
+.welcome-pill{display:none; align-items:center; gap:8px; background:var(--rose-soft); color:var(--forest); padding:8px 16px; border-radius:999px; font-size:13px; cursor:pointer;}
+
+/* ---------- HERO ---------- */
+.hero{max-width:1220px; margin:0 auto; padding:64px 28px 30px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;}
+.eyebrow{font-family:'Space Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--rose); margin-bottom:16px; display:flex; align-items:center; gap:10px;}
+.eyebrow::before{content:''; width:26px; height:1px; background:var(--rose);}
+.hero h1{font-size:54px; line-height:1.06; font-weight:500; margin-bottom:20px;}
+.hero h1 .accent{color:var(--forest); font-style:italic;}
+.hero p{font-size:16.5px; color:var(--ink-soft); max-width:440px; margin-bottom:26px; line-height:1.65;}
+.hero-ctas{display:flex; gap:14px; margin-bottom:34px;}
+.trust-row{display:flex; gap:26px; flex-wrap:wrap;}
+.trust-item{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-soft);}
+.trust-item .dot{width:6px; height:6px; border-radius:50%; background:var(--gold);}
+
+.tape-visual{position:relative; height:400px;}
+.tape-strip{position:absolute; left:50%; top:0; transform:translateX(-50%) rotate(-6deg); width:110px; height:100%; background:var(--bg-alt); border:1px solid var(--line); border-radius:60px; box-shadow:0 20px 40px -20px rgba(31,61,43,0.3); display:flex; flex-direction:column; align-items:center; padding:22px 0; overflow:hidden;}
+.tape-strip::after{content:''; position:absolute; inset:0; background:repeating-linear-gradient(to bottom, transparent 0 26px, var(--line) 26px 27px); opacity:0.7;}
+.tape-num{font-family:'Space Mono',monospace; font-size:11px; color:var(--forest); z-index:1; margin:10px 0;}
+.tape-marker{position:absolute; left:50%; top:40%; transform:translate(-50%,-50%) rotate(-6deg); background:var(--rose); color:#fff; font-family:'Space Mono',monospace; font-size:12.5px; padding:8px 14px; border-radius:8px; box-shadow:0 10px 24px -10px rgba(201,123,132,0.6); white-space:nowrap;}
+
+/* ---------- SECTIONS ---------- */
+.section{max-width:1220px; margin:0 auto; padding:60px 28px;}
+.section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:32px; flex-wrap:wrap; gap:16px;}
+.section-head .eyebrow{margin-bottom:8px;}
+.section-head h2{font-size:33px; font-weight:500;}
+.section-head p{color:var(--ink-soft); font-size:14.5px; max-width:420px;}
+
+/* filters */
+.filters-wrap{display:flex; flex-direction:column; gap:12px; margin-bottom:32px;}
+.filters{display:flex; gap:10px; flex-wrap:wrap;}
+.filter-btn{background:transparent; border:1px solid var(--line); padding:9px 18px; border-radius:999px; font-size:13px; color:var(--ink-soft); transition:.2s;}
+.filter-btn.active, .filter-btn:hover{background:var(--forest); border-color:var(--forest); color:#fff;}
+.filter-sub .filter-btn{padding:6px 14px; font-size:12px;}
+.filter-sub .filter-btn.active, .filter-sub .filter-btn:hover{background:var(--rose); border-color:var(--rose);}
+.result-count{font-family:'Space Mono',monospace; font-size:12px; color:var(--ink-soft);}
+
+/* grid & cards */
+.grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:18px; overflow:hidden; transition:transform .25s, box-shadow .25s; cursor:pointer;}
+.card:hover{transform:translateY(-5px); box-shadow:0 24px 40px -24px rgba(31,61,43,0.25);}
+.card-visual{height:190px; display:flex; align-items:center; justify-content:center; position:relative;}
+.card-tag{position:absolute; top:12px; left:12px; font-family:'Space Mono',monospace; font-size:9.5px; letter-spacing:1px; text-transform:uppercase; background:rgba(255,255,255,0.88); padding:4px 9px; border-radius:999px;}
+.card-rating{position:absolute; top:12px; right:12px; font-family:'Space Mono',monospace; font-size:10.5px; background:rgba(255,255,255,0.88); padding:4px 9px; border-radius:999px; display:flex; gap:3px; align-items:center;}
+.card-body{padding:18px 18px 20px;}
+.card-body h3{font-size:19px; font-weight:500; margin-bottom:3px;}
+.card-body .desc{font-size:12.5px; color:var(--ink-soft); margin-bottom:12px; line-height:1.4;}
+.swatches{display:flex; gap:6px; margin-bottom:14px;}
+.swatch-dot{width:16px; height:16px; border-radius:50%; border:1.5px solid #fff; box-shadow:0 0 0 1px var(--line);}
+.card-foot{display:flex; align-items:center; justify-content:space-between;}
+.price{font-family:'Space Mono',monospace; font-size:15px; color:var(--forest);}
+.card-cta{font-size:12.5px; border:none; background:none; color:var(--rose); font-weight:500;}
+.silo{width:64px; height:112px;}
+
+/* ---------- SIZE GUIDE TABLE ---------- */
+.guide-tabs{display:flex; gap:8px; margin-bottom:22px;}
+.guide-tab{border:1px solid var(--line); background:transparent; padding:8px 18px; border-radius:999px; font-size:13px; color:var(--ink-soft);}
+.guide-tab.active{background:var(--forest); color:#fff; border-color:var(--forest);}
+.guide-table-wrap{background:var(--panel); border:1px solid var(--line); border-radius:18px; overflow:hidden;}
+table{width:100%; border-collapse:collapse;}
+table th, table td{padding:14px 20px; text-align:left; font-size:13.5px; border-bottom:1px solid var(--line);}
+table th{font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--ink-soft); background:var(--bg-alt);}
+table td.mono{color:var(--forest);}
+table tr:last-child td{border-bottom:none;}
+.how-to-measure{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:22px;}
+.htm-item{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:20px;}
+.htm-item .mono{font-size:11px; color:var(--gold); letter-spacing:1px;}
+.htm-item h4{font-size:17px; margin:8px 0 6px; font-weight:500;}
+.htm-item p{font-size:12.5px; color:var(--ink-soft); line-height:1.5;}
+
+/* ---------- HOW IT WORKS ---------- */
+.how{background:var(--forest); color:#fff; border-radius:26px; padding:56px 40px;}
+.how .section-head h2, .how .section-head p{color:#fff;}
+.how .section-head p{opacity:0.75;}
+.how-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:6px;}
+.how-step{border-top:1px solid rgba(255,255,255,0.25); padding-top:16px;}
+.how-step .mono{font-size:12px; color:var(--gold); letter-spacing:1px;}
+.how-step h3{font-size:21px; margin:9px 0 7px; font-weight:500;}
+.how-step p{font-size:13.5px; opacity:0.8; line-height:1.6;}
+
+/* ---------- TESTIMONIALS ---------- */
+.testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.testi-card{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:26px;}
+.testi-stars{color:var(--gold); font-size:13px; margin-bottom:12px;}
+.testi-card p{font-size:14px; color:var(--ink); line-height:1.6; margin-bottom:18px;}
+.testi-who{display:flex; align-items:center; gap:10px;}
+.testi-avatar{width:36px; height:36px; border-radius:50%; background:var(--rose-soft);}
+.testi-who .name{font-size:13.5px; font-weight:500;}
+.testi-who .role{font-size:11.5px; color:var(--ink-soft);}
+
+/* ---------- FAQ ---------- */
+.faq-list{max-width:820px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{width:100%; background:none; border:none; padding:20px 4px; display:flex; justify-content:space-between; align-items:center; font-size:15.5px; text-align:left;}
+.faq-q .plus{font-family:'Space Mono',monospace; font-size:16px; color:var(--rose); transition:transform .2s;}
+.faq-item.open .plus{transform:rotate(45deg);}
+.faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+.faq-a p{font-size:13.5px; color:var(--ink-soft); padding:0 4px 20px; line-height:1.6; max-width:600px;}
+
+/* ---------- NEWSLETTER ---------- */
+.newsletter{background:var(--bg-alt); border-radius:26px; padding:50px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;}
+.newsletter h3{font-size:26px; font-weight:500; margin-bottom:6px;}
+.newsletter p{font-size:13.5px; color:var(--ink-soft);}
+.newsletter-form{display:flex; gap:10px;}
+.newsletter-form input{padding:12px 16px; border-radius:999px; border:1px solid var(--line); font-size:13.5px; width:240px; font-family:inherit; background:#fff;}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line); padding:56px 28px 24px; margin-top:20px;}
+.footer-wrap{max-width:1220px; margin:0 auto;}
+.footer-top{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:30px; margin-bottom:40px;}
+.footer-top h4{font-size:13px; letter-spacing:0.5px; text-transform:uppercase; font-family:'Space Mono',monospace; margin-bottom:16px; color:var(--ink-soft);}
+.footer-top ul li{margin-bottom:10px; font-size:13.5px;}
+.footer-top ul li a:hover{color:var(--rose);}
+.footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:24px; border-top:1px solid var(--line); flex-wrap:wrap; gap:12px;}
+.footer-bottom p{font-size:12.5px; color:var(--ink-soft);}
+.socials{display:flex; gap:14px; font-size:13px;}
+
+/* ---------- MODAL BASE ---------- */
+.overlay{position:fixed; inset:0; background:rgba(42,38,34,0.55); backdrop-filter:blur(3px); display:none; align-items:center; justify-content:center; z-index:100; padding:20px;}
+.overlay.open{display:flex;}
+.modal{background:var(--panel); border-radius:22px; max-width:940px; width:100%; max-height:88vh; overflow-y:auto; position:relative; box-shadow:0 40px 80px -30px rgba(0,0,0,0.4);}
+.modal-close{position:absolute; top:18px; right:20px; background:var(--bg-alt); border:none; width:34px; height:34px; border-radius:50%; font-size:16px; z-index:5;}
+
+/* ---------- PRODUCT MODAL ---------- */
+.product-modal{display:grid; grid-template-columns:0.85fr 1.15fr;}
+.pm-visual{display:flex; flex-direction:column; align-items:center; justify-content:center; padding:30px; gap:18px;}
+.pm-info{padding:40px 40px 40px 8px;}
+.pm-info .mono.tagline{font-size:11px; letter-spacing:1.5px; color:var(--rose); text-transform:uppercase;}
+.pm-info h2{font-size:30px; margin:8px 0 6px; font-weight:500;}
+.pm-rating{font-size:12.5px; color:var(--ink-soft); margin-bottom:10px; display:flex; align-items:center; gap:6px;}
+.pm-price{font-family:'Space Mono',monospace; font-size:18px; color:var(--forest); margin-bottom:18px;}
+
+.pm-tabs{display:flex; gap:20px; border-bottom:1px solid var(--line); margin-bottom:18px;}
+.pm-tab{background:none; border:none; padding:8px 0; font-size:13.5px; color:var(--ink-soft); border-bottom:2px solid transparent; margin-bottom:-1px;}
+.pm-tab.active{color:var(--forest); border-bottom-color:var(--rose); font-weight:500;}
+.pm-pane{display:none;}
+.pm-pane.active{display:block;}
+.pm-desc{font-size:13.5px; color:var(--ink-soft); line-height:1.65;}
+.pm-desc ul{margin-top:10px;}
+.pm-desc li{margin-bottom:6px; padding-left:14px; position:relative;}
+.pm-desc li::before{content:'—'; position:absolute; left:0; color:var(--rose);}
+
+.opt-label{font-size:12px; color:var(--ink-soft); margin-bottom:8px; letter-spacing:0.3px;}
+.fabric-opts{display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;}
+.fabric-btn{border:1px solid var(--line); background:#fff; padding:9px 16px; border-radius:12px; font-size:12.5px; text-align:left;}
+.fabric-btn.active{border-color:var(--forest); background:var(--bg-alt);}
+.fabric-btn .fn{display:block; font-weight:500;}
+.fabric-btn .fp{display:block; font-family:'Space Mono',monospace; font-size:11px; color:var(--ink-soft); margin-top:2px;}
+
+.color-opts{display:flex; gap:10px; margin-bottom:20px;}
+.color-btn{width:32px; height:32px; border-radius:50%; border:2px solid transparent; box-shadow:0 0 0 1px var(--line); cursor:pointer;}
+.color-btn.active{border-color:var(--forest); box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--forest);}
+
+.size-toggle{display:flex; gap:8px; background:var(--bg-alt); padding:5px; border-radius:999px; margin-bottom:20px; width:fit-content;}
+.size-toggle button{border:none; background:transparent; padding:8px 18px; border-radius:999px; font-size:13px; color:var(--ink-soft);}
+.size-toggle button.active{background:var(--forest); color:#fff;}
+
+.std-sizes{display:flex; gap:10px; margin-bottom:4px;}
+.std-size-btn{width:50px; height:50px; border-radius:50%; border:1.5px solid var(--line); background:#fff; font-family:'Space Mono',monospace; font-size:13px;}
+.std-size-btn.active{border-color:var(--forest); background:var(--forest); color:#fff;}
+
+.custom-block{display:none;}
+.custom-block.active{display:block;}
+.measure-row{margin-bottom:18px;}
+.measure-label{display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:7px;}
+.measure-label .val{font-family:'Space Mono',monospace; color:var(--forest); font-weight:700;}
+input[type=range]{-webkit-appearance:none; width:100%; height:6px; border-radius:999px; background:var(--line);}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:19px; height:19px; border-radius:50%; background:var(--forest); border:3px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,0.3); cursor:pointer;}
+.tape-ticks{display:flex; justify-content:space-between; font-family:'Space Mono',monospace; font-size:9.5px; color:var(--ink-soft); margin-top:3px; opacity:0.6;}
+.save-measure{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-soft); margin-top:6px;}
+
+.add-cart-btn{width:100%; margin-top:16px; padding:15px; font-size:15px; border-radius:999px;}
+.pm-price-live{font-family:'Space Mono',monospace; font-size:12px; color:var(--ink-soft); margin-top:8px; text-align:center;}
+
+/* ---------- AUTH MODAL ---------- */
+.auth-modal{max-width:440px; padding:44px 40px 40px;}
+.auth-tabs{display:flex; border-bottom:1px solid var(--line); margin-bottom:26px;}
+.auth-tab{flex:1; background:none; border:none; padding:10px 0; font-size:15px; color:var(--ink-soft); border-bottom:2px solid transparent; margin-bottom:-1px;}
+.auth-tab.active{color:var(--forest); border-bottom-color:var(--rose); font-weight:500;}
+.auth-modal h2{font-size:25px; margin-bottom:6px; font-weight:500;}
+.auth-modal .sub{font-size:12.5px; color:var(--ink-soft); margin-bottom:22px;}
+.field{margin-bottom:15px;}
+.field label{display:block; font-size:11.5px; color:var(--ink-soft); margin-bottom:6px;}
+.field input{width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:10px; font-size:13.5px; font-family:inherit; background:var(--bg-alt);}
+.field input:focus{outline:none; border-color:var(--forest); background:#fff;}
+.auth-submit{width:100%; padding:14px; border-radius:999px; font-size:15px; margin-top:6px;}
+.auth-note{font-size:11.5px; color:var(--ink-soft); text-align:center; margin-top:14px; line-height:1.5;}
+
+/* ---------- CART DRAWER ---------- */
+.drawer-overlay{position:fixed; inset:0; background:rgba(42,38,34,0.5); display:none; z-index:110;}
+.drawer-overlay.open{display:block;}
+.drawer{position:fixed; top:0; right:0; height:100%; width:420px; max-width:92vw; background:var(--panel); z-index:111; transform:translateX(100%); transition:transform .3s ease; display:flex; flex-direction:column; box-shadow:-20px 0 50px rgba(0,0,0,0.15);}
+.drawer.open{transform:translateX(0);}
+.drawer-head{padding:24px 24px 18px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
+.drawer-head h3{font-size:22px; font-weight:500;}
+.drawer-close{background:var(--bg-alt); border:none; width:32px; height:32px; border-radius:50%;}
+.drawer-body{flex:1; overflow-y:auto; padding:18px 24px;}
+.cart-item{display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line);}
+.ci-visual{width:56px; height:56px; border-radius:10px; flex-shrink:0;}
+.ci-info{flex:1;}
+.ci-info .name{font-size:14px; font-weight:500;}
+.ci-info .meta{font-size:11.5px; color:var(--ink-soft); margin:3px 0 8px; line-height:1.5;}
+.ci-row{display:flex; justify-content:space-between; align-items:center;}
+.qty-ctrl{display:flex; align-items:center; gap:10px; font-family:'Space Mono',monospace; font-size:13px;}
+.qty-ctrl button{background:var(--bg-alt); border:none; width:22px; height:22px; border-radius:50%;}
+.ci-remove{font-size:11px; color:var(--rose); background:none; border:none; text-decoration:underline;}
+.ci-price{font-family:'Space Mono',monospace; font-size:13.5px;}
+.drawer-empty{text-align:center; padding:60px 20px; color:var(--ink-soft); font-size:13.5px;}
+.drawer-foot{padding:20px 24px 26px; border-top:1px solid var(--line);}
+.subtotal-row{display:flex; justify-content:space-between; font-size:15px; margin-bottom:16px;}
+.subtotal-row .val{font-family:'Space Mono',monospace; color:var(--forest);}
+
+/* ---------- ACCOUNT MODAL ---------- */
+.account-modal{max-width:520px; padding:40px;}
+.account-modal h2{font-size:26px; margin-bottom:4px; font-weight:500;}
+.account-modal .sub{font-size:13px; color:var(--ink-soft); margin-bottom:24px;}
+.account-block{background:var(--bg-alt); border-radius:16px; padding:20px; margin-bottom:16px;}
+.account-block h4{font-size:12px; letter-spacing:1px; text-transform:uppercase; font-family:'Space Mono',monospace; color:var(--ink-soft); margin-bottom:12px;}
+.measure-chips{display:flex; flex-wrap:wrap; gap:8px;}
+.measure-chip{background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 14px; font-size:12.5px; font-family:'Space Mono',monospace;}
+.account-empty{font-size:13px; color:var(--ink-soft);}
+.logout-btn{font-size:12.5px; color:var(--rose); background:none; border:none; text-decoration:underline; margin-top:10px;}
+
+@media(max-width:960px){
+  .grid{grid-template-columns:repeat(2,1fr);}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .how-to-measure{grid-template-columns:repeat(2,1fr);}
+  .testi-grid{grid-template-columns:1fr;}
+}
+@media(max-width:880px){
+  .hero{grid-template-columns:1fr; padding-top:36px;}
+  .tape-visual{display:none;}
+  .product-modal{grid-template-columns:1fr;}
+  .how-steps{grid-template-columns:1fr;}
+  nav ul{display:none;}
+  .newsletter{flex-direction:column; align-items:flex-start;}
+}
+@media(max-width:560px){
+  .grid{grid-template-columns:1fr;}
+  .hero h1{font-size:36px;}
+  .footer-top{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="brand"><div class="brand-mark">AM</div><div class="brand-name">A <em>Medida</em></div></div>
+    <nav>
+      <ul>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#guia-tallas">Guía de tallas</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <div class="welcome-pill" id="welcomePill" onclick="openModal('accountOverlay')">Hola, <span id="welcomeText"></span></div>
+      <button class="icon-btn" id="openAuthBtn">Ingresar</button>
+      <button class="icon-btn" id="cartBtn">🛍 Carrito<span class="badge" id="cartCount" style="display:none;">0</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">Sastrería a la medida</div>
+    <h1>Cada traje se ajusta a <span class="accent">tu cuerpo</span>, no al revés</h1>
+    <p>Explora trajes de dama y caballero, elige tela y color, y define tu talla con nuestro selector interactivo tipo cinta métrica. Confeccionado para ti, no para "la talla promedio".</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="scrollTo('catalogo')">Ver catálogo</button>
+      <button class="btn-outline" onclick="scrollTo('como-funciona')">Cómo funciona</button>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item"><span class="dot"></span>Medidas guardadas en tu cuenta</div>
+      <div class="trust-item"><span class="dot"></span>Cambios de talla sin costo</div>
+      <div class="trust-item"><span class="dot"></span>Confección entre 12 y 18 días</div>
+    </div>
+  </div>
+  <div class="tape-visual">
+    <div class="tape-strip">
+      <span class="tape-num">0</span><span class="tape-num">5</span><span class="tape-num">10</span>
+      <span class="tape-num">15</span><span class="tape-num">20</span><span class="tape-num">25</span>
+      <span class="tape-num">30</span><span class="tape-num">35</span><span class="tape-num">40</span>
+      <span class="tape-num">45</span><span class="tape-num">50</span>
+    </div>
+    <div class="tape-marker">tu medida exacta</div>
+  </div>
+</section>
+
+<div class="ruler"></div>
+<div class="ruler-label">catálogo completo</div>
+
+<section class="section" id="catalogo">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Colección actual</div>
+      <h2>Trajes disponibles</h2>
+      <p>Filtra por colección y ocasión. Cada modelo se personaliza en tela, color y medida.</p>
+    </div>
+    <span class="result-count" id="resultCount">8 modelos</span>
+  </div>
+
+  <div class="filters-wrap">
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="todos">Todos</button>
+      <button class="filter-btn" data-filter="dama">Dama</button>
+      <button class="filter-btn" data-filter="caballero">Caballero</button>
+    </div>
+    <div class="filters filter-sub" id="filtersOcasion">
+      <button class="filter-btn active" data-oc="todas">Toda ocasión</button>
+      <button class="filter-btn" data-oc="ejecutivo">Ejecutivo</button>
+      <button class="filter-btn" data-oc="ceremonia">Ceremonia</button>
+      <button class="filter-btn" data-oc="casual">Casual</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</section>
+
+<div class="ruler"></div>
+<div class="ruler-label">guía de medidas</div>
+
+<section class="section" id="guia-tallas">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Antes de elegir</div>
+      <h2>Guía de tallas</h2>
+      <p>Consulta la equivalencia en centímetros o mejor aún, ingresa tu propia medida en cada producto.</p>
+    </div>
+  </div>
+  <div class="guide-tabs">
+    <button class="guide-tab active" onclick="setGuideTab('caballero')">Caballero</button>
+    <button class="guide-tab" onclick="setGuideTab('dama')">Dama</button>
+  </div>
+  <div class="guide-table-wrap">
+    <table id="guideTable"></table>
+  </div>
+  <div class="how-to-measure">
+    <div class="htm-item"><div class="mono">01</div><h4>Pecho / busto</h4><p>Rodea la parte más ancha del pecho manteniendo la cinta horizontal.</p></div>
+    <div class="htm-item"><div class="mono">02</div><h4>Cintura</h4><p>Mide justo por encima del ombligo, sin apretar la cinta.</p></div>
+    <div class="htm-item"><div class="mono">03</div><h4>Cadera</h4><p>Rodea la parte más ancha de la cadera y glúteos.</p></div>
+    <div class="htm-item"><div class="mono">04</div><h4>Largo</h4><p>Manga: hombro a muñeca. Pierna: cintura a talón.</p></div>
+  </div>
+</section>
+
+<div class="ruler"></div>
+<div class="ruler-label">proceso</div>
+
+<section class="section" id="como-funciona">
+  <div class="how">
+    <div class="section-head">
+      <div><div class="eyebrow" style="color:var(--gold);">Simple y guiado</div><h2>Cómo funciona la medida personalizada</h2><p>Tres pasos entre elegir el modelo y recibir tu traje cortado a tu forma exacta.</p></div>
+    </div>
+    <div class="how-steps">
+      <div class="how-step"><div class="mono">01</div><h3>Elige el modelo</h3><p>Recorre la colección de dama y caballero, y selecciona tela y color entre las variantes disponibles.</p></div>
+      <div class="how-step"><div class="mono">02</div><h3>Ingresa tus medidas</h3><p>Usa la cinta métrica interactiva para ajustar pecho, cintura, cadera y largo — o elige una talla estándar si prefieres rapidez.</p></div>
+      <div class="how-step"><div class="mono">03</div><h3>Guarda y recibe</h3><p>Guardamos tus medidas en tu cuenta para que tu próximo pedido sea aún más rápido.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="ruler"></div>
+<div class="ruler-label">clientes</div>
+
+<section class="section" id="opiniones">
+  <div class="section-head">
+    <div><div class="eyebrow">Casos reales</div><h2>Lo que dicen quienes ya se midieron</h2></div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p>"Nunca había comprado un traje que me quedara así de bien sin ir a un sastre físico. El selector de medidas es súper intuitivo."</p><div class="testi-who"><div class="testi-avatar"></div><div><div class="name">Marcela R.</div><div class="role">Traje sastre rosa palo</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p>"Pedí el esmoquin para una boda y llegó exactamente con las medidas que ingresé. El proceso fue más rápido de lo que esperaba."</p><div class="testi-who"><div class="testi-avatar"></div><div><div class="name">Julián T.</div><div class="role">Esmoquin ceremonia</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">★★★★☆</div><p>"Me gustó poder guardar mis medidas en la cuenta. El segundo pedido lo hice en minutos."</p><div class="testi-who"><div class="testi-avatar"></div><div><div class="name">Daniela P.</div><div class="role">Conjunto pantalón verde</div></div></div></div>
+  </div>
+</section>
+
+<div class="ruler"></div>
+<div class="ruler-label">preguntas frecuentes</div>
+
+<section class="section" id="preguntas">
+  <div class="section-head">
+    <div><div class="eyebrow">Resolvemos dudas</div><h2>Preguntas frecuentes</h2></div>
+  </div>
+  <div class="faq-list" id="faqList"></div>
+</section>
+
+<section class="section">
+  <div class="newsletter">
+    <div><h3>Recibe novedades de la colección</h3><p>Nuevos modelos, telas de temporada y descuentos exclusivos para suscriptores.</p></div>
+    <div class="newsletter-form">
+      <input type="email" placeholder="tucorreo@ejemplo.com">
+      <button class="btn-primary" onclick="alert('Gracias por suscribirte (demo).')">Suscribirme</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-top">
+      <div>
+        <div class="brand"><div class="brand-mark">AM</div><div class="brand-name" style="font-size:18px;">A <em>Medida</em></div></div>
+        <p style="font-size:13px; color:var(--ink-soft); margin-top:14px; max-width:260px; line-height:1.6;">Trajes de dama y caballero confeccionados a partir de tus propias medidas.</p>
+      </div>
+      <div><h4>Tienda</h4><ul><li><a href="#catalogo">Catálogo</a></li><li><a href="#guia-tallas">Guía de tallas</a></li><li><a href="#">Novedades</a></li></ul></div>
+      <div><h4>Ayuda</h4><ul><li><a href="#preguntas">Preguntas frecuentes</a></li><li><a href="#">Cambios y devoluciones</a></li><li><a href="#">Contacto</a></li></ul></div>
+      <div><h4>Empresa</h4><ul><li><a href="#">Sobre nosotros</a></li><li><a href="#como-funciona">Cómo funciona</a></li><li><a href="#opiniones">Opiniones</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>Demo funcional · A Medida — todos los derechos reservados</p>
+      <div class="socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">TikTok</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ PRODUCT MODAL ============ -->
+<div class="overlay" id="productOverlay">
+  <div class="modal product-modal">
+    <button class="modal-close" onclick="closeModal('productOverlay')">✕</button>
+    <div class="pm-visual" id="pmVisual"></div>
+    <div class="pm-info">
+      <div class="mono tagline" id="pmTag">CABALLERO · EJECUTIVO</div>
+      <h2 id="pmName">Traje Ejecutivo Azul</h2>
+      <div class="pm-rating" id="pmRating">★★★★★ <span>(128 opiniones)</span></div>
+      <div class="pm-price mono" id="pmPrice">$ 480.000</div>
+
+      <div class="pm-tabs">
+        <button class="pm-tab active" onclick="setPmTab('desc')">Descripción</button>
+        <button class="pm-tab" onclick="setPmTab('medida')">Tela, color y medida</button>
+      </div>
+
+      <div class="pm-pane active" id="paneDesc">
+        <p class="pm-desc" id="pmDesc"></p>
+      </div>
+
+      <div class="pm-pane" id="paneMedida">
+        <div class="opt-label">Tela</div>
+        <div class="fabric-opts" id="fabricOpts"></div>
+
+        <div class="opt-label">Color</div>
+        <div class="color-opts" id="colorOpts"></div>
+
+        <div class="opt-label">Talla</div>
+        <div class="size-toggle">
+          <button class="active" id="tabStd" onclick="setSizeMode('std')">Talla estándar</button>
+          <button id="tabCustom" onclick="setSizeMode('custom')">Medida personalizada</button>
+        </div>
+
+        <div id="stdBlock">
+          <div class="std-sizes" id="stdSizes">
+            <button class="std-size-btn">S</button>
+            <button class="std-size-btn">M</button>
+            <button class="std-size-btn">L</button>
+            <button class="std-size-btn">XL</button>
+          </div>
+        </div>
+
+        <div class="custom-block" id="customBlock">
+          <div class="measure-row">
+            <div class="measure-label"><span>Pecho / busto</span><span class="val" id="valPecho">96</span></div>
+            <input type="range" min="76" max="130" value="96" id="sliderPecho">
+            <div class="tape-ticks"><span>76</span><span>103</span><span>130 cm</span></div>
+          </div>
+          <div class="measure-row">
+            <div class="measure-label"><span>Cintura</span><span class="val" id="valCintura">82</span></div>
+            <input type="range" min="60" max="120" value="82" id="sliderCintura">
+            <div class="tape-ticks"><span>60</span><span>90</span><span>120 cm</span></div>
+          </div>
+          <div class="measure-row">
+            <div class="measure-label"><span>Cadera</span><span class="val" id="valCadera">98</span></div>
+            <input type="range" min="70" max="130" value="98" id="sliderCadera">
+            <div class="tape-ticks"><span>70</span><span>100</span><span>130 cm</span></div>
+          </div>
+          <div class="measure-row">
+            <div class="measure-label"><span>Largo de manga / pierna</span><span class="val" id="valLargo">62</span></div>
+            <input type="range" min="50" max="90" value="62" id="sliderLargo">
+            <div class="tape-ticks"><span>50</span><span>70</span><span>90 cm</span></div>
+          </div>
+          <label class="save-measure"><input type="checkbox" id="saveMeasureChk" checked> Guardar estas medidas en mi perfil</label>
+        </div>
+      </div>
+
+      <button class="btn-primary add-cart-btn" onclick="addToCart()">Agregar al carrito</button>
+      <div class="pm-price-live" id="pmPriceLive"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ AUTH MODAL ============ -->
+<div class="overlay" id="authOverlay">
+  <div class="modal auth-modal">
+    <button class="modal-close" onclick="closeModal('authOverlay')">✕</button>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="setAuthMode('login')">Iniciar sesión</button>
+      <button class="auth-tab" id="tabRegister" onclick="setAuthMode('register')">Crear cuenta</button>
+    </div>
+    <div id="loginForm">
+      <h2>Bienvenido de nuevo</h2>
+      <p class="sub">Ingresa para ver tus medidas guardadas y tus pedidos.</p>
+      <div class="field"><label>Correo electrónico</label><input type="email" placeholder="tucorreo@ejemplo.com" id="loginEmail"></div>
+      <div class="field"><label>Contraseña</label><input type="password" placeholder="••••••••" id="loginPass"></div>
+      <button class="btn-primary auth-submit" onclick="doLogin()">Iniciar sesión</button>
+      <p class="auth-note">Demo sin servidor: cualquier correo y contraseña funcionan para probar el flujo.</p>
+    </div>
+    <div id="registerForm" style="display:none;">
+      <h2>Crea tu cuenta</h2>
+      <p class="sub">Guarda tus medidas para pedir más rápido la próxima vez.</p>
+      <div class="field"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" id="regName"></div>
+      <div class="field"><label>Correo electrónico</label><input type="email" placeholder="tucorreo@ejemplo.com" id="regEmail"></div>
+      <div class="field"><label>Contraseña</label><input type="password" placeholder="Crea una contraseña" id="regPass"></div>
+      <button class="btn-primary auth-submit" onclick="doRegister()">Crear cuenta</button>
+      <p class="auth-note">Al continuar aceptas guardar tus medidas para futuras compras.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ACCOUNT MODAL ============ -->
+<div class="overlay" id="accountOverlay">
+  <div class="modal account-modal">
+    <button class="modal-close" onclick="closeModal('accountOverlay')">✕</button>
+    <h2>Mi cuenta</h2>
+    <p class="sub" id="accountSub">Hola de nuevo</p>
+    <div class="account-block">
+      <h4>Últimas medidas guardadas</h4>
+      <div id="savedMeasuresBox"><p class="account-empty">Todavía no has guardado medidas. Personaliza un traje y marca "Guardar estas medidas en mi perfil".</p></div>
+    </div>
+    <div class="account-block">
+      <h4>Pedidos</h4>
+      <p class="account-empty" id="ordersBox">Aún no tienes pedidos confirmados en esta sesión de demo.</p>
+    </div>
+    <button class="logout-btn" onclick="doLogout()">Cerrar sesión</button>
+  </div>
+</div>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeCart()"></div>
+<div class="drawer" id="cartDrawer">
+  <div class="drawer-head"><h3>Tu carrito</h3><button class="drawer-close" onclick="closeCart()">✕</button></div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot" style="display:none;">
+    <div class="subtotal-row"><span>Subtotal</span><span class="val mono" id="subtotalVal">$ 0</span></div>
+    <button class="btn-primary" style="width:100%; padding:14px; border-radius:999px;" onclick="checkout()">Confirmar pedido</button>
+  </div>
+</div>
+
+<script>
+/* ---------------- DATA ---------------- */
+const products = [
+  {id:1, cat:'caballero', occasion:'ejecutivo', name:'Traje Ejecutivo Azul', price:480000, rating:5, reviews:128,
+    desc:'Corte clásico en lana peinada, forro completo, solapa de pico. Ideal para reuniones y jornadas largas de oficina.',
+    features:['Lana peinada 130s','Forro transpirable','Solapa de pico','Entretela flotante'],
+    colors:[{hex:'#1F3D2B',name:'Verde noche'},{hex:'#22304a',name:'Azul marino'},{hex:'#3a3a3a',name:'Grafito'}],
+    fabrics:[{name:'Lana peinada', extra:0},{name:'Lana fría', extra:35000}]},
+  {id:2, cat:'caballero', occasion:'ceremonia', name:'Esmoquin Ceremonia', price:620000, rating:5, reviews:94,
+    desc:'Solapa de raso, una sola pieza de botonadura, corte elegante para eventos formales y bodas.',
+    features:['Solapa de raso','Botonadura única','Pretina a juego','Corte entallado'],
+    colors:[{hex:'#14261B',name:'Negro verdoso'},{hex:'#2A2622',name:'Negro cálido'}],
+    fabrics:[{name:'Lana con raso', extra:0},{name:'Terciopelo', extra:80000}]},
+  {id:3, cat:'caballero', occasion:'ejecutivo', name:'Traje Gris Oxford', price:450000, rating:4, reviews:76,
+    desc:'Tejido oxford transpirable, corte entallado moderno, versátil para el día a día profesional.',
+    features:['Tejido oxford','Corte entallado','Bolsillos funcionales','Fácil de planchar'],
+    colors:[{hex:'#5c5c5c',name:'Gris medio'},{hex:'#8a8a8a',name:'Gris claro'}],
+    fabrics:[{name:'Oxford algodón', extra:0},{name:'Mezcla lana-lino', extra:25000}]},
+  {id:4, cat:'caballero', occasion:'casual', name:'Blazer Lino Natural', price:340000, rating:4, reviews:41,
+    desc:'Blazer desestructurado en lino, ligero y fresco, pensado para climas cálidos y ocasiones semiformales.',
+    features:['Lino 100%','Sin forro (fresco)','Corte relajado','Botones de nácar'],
+    colors:[{hex:'#cdbfa0',name:'Arena'},{hex:'#7c8a6f',name:'Verde oliva'}],
+    fabrics:[{name:'Lino natural', extra:0}]},
+  {id:5, cat:'dama', occasion:'ejecutivo', name:'Traje Sastre Rosa Palo', price:410000, rating:5, reviews:112,
+    desc:'Blazer y falda a juego en tono empolvado, hombros estructurados y silueta entallada.',
+    features:['Blazer + falda','Hombros estructurados','Forro interior','Cierre invisible'],
+    colors:[{hex:'#C97B84',name:'Rosa palo'},{hex:'#e0b0b6',name:'Rosa claro'},{hex:'#8f5a63',name:'Vino'}],
+    fabrics:[{name:'Crepé', extra:0},{name:'Lana fría', extra:30000}]},
+  {id:6, cat:'dama', occasion:'ejecutivo', name:'Conjunto Pantalón Verde', price:395000, rating:4, reviews:58,
+    desc:'Blazer oversize y pantalón recto en verde bosque, silueta moderna y cómoda para el trabajo.',
+    features:['Blazer oversize','Pantalón recto','Bolsillos laterales','Tejido con stretch'],
+    colors:[{hex:'#1F3D2B',name:'Verde bosque'},{hex:'#3d5a45',name:'Verde salvia'}],
+    fabrics:[{name:'Twill stretch', extra:0}]},
+  {id:7, cat:'dama', occasion:'ceremonia', name:'Traje Sastre Marfil', price:430000, rating:5, reviews:87,
+    desc:'Elegancia minimalista en tono marfil con botones dorados, ideal para ceremonias diurnas.',
+    features:['Botones dorados','Silueta entallada','Forro de raso','Falda midi'],
+    colors:[{hex:'#e9e0d2',name:'Marfil'},{hex:'#B8935F',name:'Dorado suave'}],
+    fabrics:[{name:'Crepé satinado', extra:0},{name:'Seda mezcla', extra:60000}]},
+  {id:8, cat:'dama', occasion:'casual', name:'Blazer Lino Rosa', price:320000, rating:4, reviews:35,
+    desc:'Blazer ligero en lino con corte relajado, perfecto para looks casuales de entretiempo.',
+    features:['Lino 100%','Corte relajado','Manga 3/4','Sin forro'],
+    colors:[{hex:'#e0b0b6',name:'Rosa claro'},{hex:'#cdbfa0',name:'Arena'}],
+    fabrics:[{name:'Lino natural', extra:0}]},
+];
+
+const sizeGuide = {
+  caballero: [
+    ['S','88 – 92','74 – 78','92 – 96'],
+    ['M','96 – 100','82 – 86','100 – 104'],
+    ['L','104 – 108','90 – 94','108 – 112'],
+    ['XL','112 – 116','98 – 102','116 – 120'],
+  ],
+  dama: [
+    ['S','82 – 86','62 – 66','88 – 92'],
+    ['M','88 – 92','68 – 72','94 – 98'],
+    ['L','94 – 98','74 – 78','100 – 104'],
+    ['XL','100 – 104','80 – 84','106 – 110'],
+  ]
+};
+
+const faqs = [
+  {q:'¿Cuánto tarda la confección de un traje a medida?', a:'Entre 12 y 18 días hábiles desde que confirmas tus medidas, dependiendo de la tela elegida.'},
+  {q:'¿Puedo cambiar la talla después de comprar?', a:'Sí. Si tus medidas no quedan exactas al recibirlo, el primer ajuste es gratuito dentro de los 30 días posteriores a la entrega.'},
+  {q:'¿Cómo sé qué medida ingresar si nunca me he medido?', a:'En la guía de tallas te explicamos paso a paso cómo tomar cada medida con una cinta métrica común, en menos de 5 minutos.'},
+  {q:'¿Las medidas quedan guardadas para próximas compras?', a:'Sí, si tienes una cuenta creada puedes guardar tus medidas al momento de personalizar un traje y reutilizarlas después.'},
+  {q:'¿Qué métodos de pago aceptan?', a:'Tarjetas de crédito y débito, transferencia bancaria y pago contra entrega en ciudades principales (demo ilustrativo).'},
+];
+
+/* ---------------- STATE ---------------- */
+let currentFilter = 'todos';
+let currentOcasion = 'todas';
+let cart = [];
+let sizeMode = 'std';
+let selectedStdSize = null;
+let selectedFabricIdx = 0;
+let selectedColorIdx = 0;
+let activeProduct = null;
+let currentUser = null;
+let savedMeasures = null;
+
+/* ---------------- HELPERS ---------------- */
+function scrollTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+function fmt(n){ return '$ ' + n.toLocaleString('es-CO'); }
+
+function silhouette(cat, c1, c2, size){
+  size = size || 64;
+  const h = size * 1.75;
+  if(cat === 'dama'){
+    return `<svg class="silo" width="${size}" height="${h}" viewBox="0 0 74 130" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="37" cy="14" rx="11" ry="12" fill="${c1}"/>
+      <path d="M20 26 Q37 20 54 26 L60 70 Q37 82 14 70 Z" fill="${c1}"/>
+      <path d="M18 68 Q37 60 56 68 L50 128 L24 128 Z" fill="${c2}"/>
+    </svg>`;
+  }
+  return `<svg class="silo" width="${size}" height="${h}" viewBox="0 0 74 130" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="37" cy="14" rx="11" ry="12" fill="${c1}"/>
+    <path d="M18 26 Q37 18 56 26 L62 82 Q37 94 12 82 Z" fill="${c1}"/>
+    <rect x="24" y="80" width="26" height="48" fill="${c2}"/>
+  </svg>`;
+}
+function stars(n){ return '★'.repeat(n) + '☆'.repeat(5-n); }
+
+/* ---------------- RENDER GRID ---------------- */
+function renderGrid(){
+  const grid = document.getElementById('grid');
+  const list = products.filter(p =>
+    (currentFilter === 'todos' || p.cat === currentFilter) &&
+    (currentOcasion === 'todas' || p.occasion === currentOcasion)
+  );
+  document.getElementById('resultCount').textContent = list.length + (list.length===1 ? ' modelo' : ' modelos');
+  grid.innerHTML = list.map(p => `
+    <div class="card" onclick="openProduct(${p.id})">
+      <div class="card-visual" style="background:linear-gradient(135deg, ${p.colors[0].hex}22, ${p.colors[Math.min(1,p.colors.length-1)].hex}33);">
+        <div class="card-tag">${p.tag || p.cat.toUpperCase()}</div>
+        <div class="card-rating">★ ${p.rating}.0</div>
+        ${silhouette(p.cat, p.colors[0].hex, p.colors[Math.min(1,p.colors.length-1)].hex)}
+      </div>
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <p class="desc">${p.desc.slice(0,72)}${p.desc.length>72?'…':''}</p>
+        <div class="swatches">${p.colors.map(c=>`<span class="swatch-dot" style="background:${c.hex};"></span>`).join('')}</div>
+        <div class="card-foot">
+          <span class="price">${fmt(p.price)}</span>
+          <button class="card-cta">Ver medidas →</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+document.getElementById('filters').addEventListener('click', (e)=>{
+  if(e.target.classList.contains('filter-btn')){
+    document.querySelectorAll('#filters .filter-btn').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    currentFilter = e.target.dataset.filter;
+    renderGrid();
+  }
+});
+document.getElementById('filtersOcasion').addEventListener('click', (e)=>{
+  if(e.target.classList.contains('filter-btn')){
+    document.querySelectorAll('#filtersOcasion .filter-btn').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    currentOcasion = e.target.dataset.oc;
+    renderGrid();
+  }
+});
+
+/* ---------------- SIZE GUIDE ---------------- */
+function setGuideTab(which){
+  document.querySelectorAll('.guide-tab').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderGuideTable(which);
+}
+function renderGuideTable(which){
+  const rows = sizeGuide[which];
+  const label = which === 'caballero' ? ['Pecho (cm)','Cintura (cm)','Cadera (cm)'] : ['Busto (cm)','Cintura (cm)','Cadera (cm)'];
+  document.getElementById('guideTable').innerHTML = `
+    <tr><th>Talla</th><th>${label[0]}</th><th>${label[1]}</th><th>${label[2]}</th></tr>
+    ${rows.map(r=>`<tr><td class="mono">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}
+  `;
+}
+renderGuideTable('caballero');
+
+/* ---------------- FAQ ---------------- */
+function renderFaq(){
+  document.getElementById('faqList').innerHTML = faqs.map((f,i)=>`
+    <div class="faq-item" id="faq-${i}">
+      <button class="faq-q" onclick="toggleFaq(${i})"><span>${f.q}</span><span class="plus">+</span></button>
+      <div class="faq-a" id="faq-a-${i}"><p>${f.a}</p></div>
+    </div>
+  `).join('');
+}
+function toggleFaq(i){
+  const item = document.getElementById('faq-'+i);
+  const answer = document.getElementById('faq-a-'+i);
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(el=>el.classList.remove('open'));
+  document.querySelectorAll('.faq-a').forEach(el=>el.style.maxHeight = null);
+  if(!isOpen){ item.classList.add('open'); answer.style.maxHeight = answer.scrollHeight + 'px'; }
+}
+renderFaq();
+
+/* ---------------- PRODUCT MODAL ---------------- */
+function openProduct(id){
+  activeProduct = products.find(p=>p.id===id);
+  selectedFabricIdx = 0; selectedColorIdx = 0; selectedStdSize = null;
+  document.getElementById('pmTag').textContent = activeProduct.cat.toUpperCase() + ' · ' + activeProduct.occasion.toUpperCase();
+  document.getElementById('pmName').textContent = activeProduct.name;
+  document.getElementById('pmRating').innerHTML = stars(activeProduct.rating) + ` <span>(${activeProduct.reviews} opiniones)</span>`;
+  document.getElementById('pmDesc').innerHTML = activeProduct.desc + '<ul>' + activeProduct.features.map(f=>`<li>${f}</li>`).join('') + '</ul>';
+
+  renderFabricOpts();
+  renderColorOpts();
+  updateVisual();
+  updatePrice();
+  setPmTab('desc');
+  setSizeMode('std');
+  document.querySelectorAll('.std-size-btn').forEach(b=>b.classList.remove('active'));
+  openModal('productOverlay');
+}
+
+function renderFabricOpts(){
+  document.getElementById('fabricOpts').innerHTML = activeProduct.fabrics.map((f,i)=>`
+    <button class="fabric-btn ${i===selectedFabricIdx?'active':''}" onclick="selectFabric(${i})">
+      <span class="fn">${f.name}</span><span class="fp">${f.extra>0 ? '+ '+fmt(f.extra) : 'incluido'}</span>
+    </button>`).join('');
+}
+function selectFabric(i){ selectedFabricIdx = i; renderFabricOpts(); updatePrice(); }
+
+function renderColorOpts(){
+  document.getElementById('colorOpts').innerHTML = activeProduct.colors.map((c,i)=>`
+    <button class="color-btn ${i===selectedColorIdx?'active':''}" style="background:${c.hex};" title="${c.name}" onclick="selectColor(${i})"></button>`).join('');
+}
+function selectColor(i){ selectedColorIdx = i; renderColorOpts(); updateVisual(); }
+
+function updateVisual(){
+  const c1 = activeProduct.colors[selectedColorIdx].hex;
+  const c2 = activeProduct.colors[Math.min(selectedColorIdx+1, activeProduct.colors.length-1)].hex;
+  document.getElementById('pmVisual').innerHTML = `
+    <div style="width:200px;height:280px;border-radius:16px;background:linear-gradient(160deg, ${c1}25, ${c2}40);display:flex;align-items:center;justify-content:center;">
+      ${silhouette(activeProduct.cat, c1, c2, 120)}
+    </div>
+    <span class="mono" style="font-size:11px;color:var(--ink-soft);">${activeProduct.colors[selectedColorIdx].name}</span>
+  `;
+}
+
+function updatePrice(){
+  const extra = activeProduct.fabrics[selectedFabricIdx].extra;
+  const total = activeProduct.price + extra;
+  document.getElementById('pmPrice').textContent = fmt(total);
+  document.getElementById('pmPriceLive').textContent = extra>0 ? `Incluye ${fmt(extra)} por tela seleccionada` : '';
+}
+
+function setPmTab(which){
+  document.querySelectorAll('.pm-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.pm-pane').forEach(b=>b.classList.remove('active'));
+  document.getElementById(which==='desc'?'paneDesc':'paneMedida').classList.add('active');
+  event.target.classList.add('active');
+}
+
+document.getElementById('stdSizes').addEventListener('click', (e)=>{
+  if(e.target.classList.contains('std-size-btn')){
+    document.querySelectorAll('.std-size-btn').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    selectedStdSize = e.target.textContent;
+  }
+});
+
+function setSizeMode(mode){
+  sizeMode = mode;
+  document.getElementById('tabStd').classList.toggle('active', mode==='std');
+  document.getElementById('tabCustom').classList.toggle('active', mode==='custom');
+  document.getElementById('stdBlock').style.display = mode==='std' ? 'block' : 'none';
+  document.getElementById('customBlock').classList.toggle('active', mode==='custom');
+}
+
+function bindSlider(id, valId){
+  const slider = document.getElementById(id);
+  const val = document.getElementById(valId);
+  const update = ()=>{
+    val.textContent = slider.value;
+    const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+    slider.style.background = `linear-gradient(to right, #C97B84 0%, #C97B84 ${pct}%, #DED1C1 ${pct}%, #DED1C1 100%)`;
+  };
+  slider.addEventListener('input', update);
+  update();
+}
+bindSlider('sliderPecho','valPecho');
+bindSlider('sliderCintura','valCintura');
+bindSlider('sliderCadera','valCadera');
+bindSlider('sliderLargo','valLargo');
+
+/* ---------------- CART ---------------- */
+function addToCart(){
+  if(sizeMode==='std' && !selectedStdSize){
+    alert('Por favor elige una talla estándar, o cambia a medida personalizada.');
+    return;
+  }
+  const extra = activeProduct.fabrics[selectedFabricIdx].extra;
+  const unitPrice = activeProduct.price + extra;
+  let sizeLabel;
+  let measuresObj = null;
+  if(sizeMode==='std'){
+    sizeLabel = 'Talla ' + selectedStdSize;
+  } else {
+    measuresObj = {
+      pecho: document.getElementById('sliderPecho').value,
+      cintura: document.getElementById('sliderCintura').value,
+      cadera: document.getElementById('sliderCadera').value,
+      largo: document.getElementById('sliderLargo').value,
+    };
+    sizeLabel = `Medida: P${measuresObj.pecho} C${measuresObj.cintura} Cd${measuresObj.cadera} L${measuresObj.largo}`;
+    if(document.getElementById('saveMeasureChk').checked){
+      savedMeasures = measuresObj;
+    }
+  }
+
+  cart.push({
+    cartId: Date.now(),
+    name: activeProduct.name,
+    color: activeProduct.colors[selectedColorIdx],
+    fabric: activeProduct.fabrics[selectedFabricIdx].name,
+    sizeLabel,
+    price: unitPrice,
+    qty: 1
+  });
+
+  closeModal('productOverlay');
+  renderCart();
+  openCart();
+}
+
+function renderCart(){
+  const body = document.getElementById('drawerBody');
+  const foot = document.getElementById('drawerFoot');
+  const countEl = document.getElementById('cartCount');
+  const totalQty = cart.reduce((s,i)=>s+i.qty,0);
+  countEl.textContent = totalQty;
+  countEl.style.display = totalQty>0 ? 'flex' : 'none';
+
+  if(cart.length === 0){
+    body.innerHTML = `<div class="drawer-empty">Tu carrito está vacío.<br>Explora el catálogo y personaliza tu primer traje.</div>`;
+    foot.style.display = 'none';
+    return;
+  }
+  body.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="ci-visual" style="background:${item.color.hex};"></div>
+      <div class="ci-info">
+        <div class="name">${item.name}</div>
+        <div class="meta">${item.color.name} · ${item.fabric}<br>${item.sizeLabel}</div>
+        <div class="ci-row">
+          <div class="qty-ctrl">
+            <button onclick="changeQty(${item.cartId}, -1)">–</button>${item.qty}<button onclick="changeQty(${item.cartId}, 1)">+</button>
+          </div>
+          <span class="ci-price mono">${fmt(item.price * item.qty)}</span>
+        </div>
+        <button class="ci-remove" onclick="removeItem(${item.cartId})">Eliminar</button>
+      </div>
+    </div>
+  `).join('');
+  const subtotal = cart.reduce((s,i)=>s + i.price*i.qty, 0);
+  document.getElementById('subtotalVal').textContent = fmt(subtotal);
+  foot.style.display = 'block';
+}
+function changeQty(id, delta){
+  const item = cart.find(i=>i.cartId===id);
+  item.qty = Math.max(1, item.qty + delta);
+  renderCart();
+}
+function removeItem(id){ cart = cart.filter(i=>i.cartId!==id); renderCart(); }
+function checkout(){
+  alert('Pedido confirmado (demo). En un sitio real esto abriría el pago y crearía la orden en la base de datos.');
+  cart = [];
+  renderCart();
+  closeCart();
+}
+document.getElementById('cartBtn').addEventListener('click', openCart);
+function openCart(){ document.getElementById('cartDrawer').classList.add('open'); document.getElementById('drawerOverlay').classList.add('open'); }
+function closeCart(){ document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('drawerOverlay').classList.remove('open'); }
+
+/* ---------------- AUTH ---------------- */
+function setAuthMode(mode){
+  document.getElementById('tabLogin').classList.toggle('active', mode==='login');
+  document.getElementById('tabRegister').classList.toggle('active', mode==='register');
+  document.getElementById('loginForm').style.display = mode==='login' ? 'block' : 'none';
+  document.getElementById('registerForm').style.display = mode==='register' ? 'block' : 'none';
+}
+document.getElementById('openAuthBtn').addEventListener('click', ()=> openModal('authOverlay'));
+
+function doLogin(){
+  const email = document.getElementById('loginEmail').value;
+  if(!email){ alert('Ingresa un correo para continuar (demo).'); return; }
+  currentUser = email.split('@')[0];
+  applyLoggedInState();
+  closeModal('authOverlay');
+}
+function doRegister(){
+  const name = document.getElementById('regName').value;
+  const email = document.getElementById('regEmail').value;
+  if(!name || !email){ alert('Completa nombre y correo para continuar (demo).'); return; }
+  currentUser = name.split(' ')[0];
+  applyLoggedInState();
+  closeModal('authOverlay');
+}
+function applyLoggedInState(){
+  document.getElementById('welcomeText').textContent = currentUser;
+  document.getElementById('welcomePill').style.display = 'flex';
+  document.getElementById('openAuthBtn').style.display = 'none';
+}
+function doLogout(){
+  currentUser = null;
+  document.getElementById('welcomePill').style.display = 'none';
+  document.getElementById('openAuthBtn').style.display = 'flex';
+  closeModal('accountOverlay');
+}
+
+/* account modal render */
+document.getElementById('welcomePill').addEventListener('click', ()=>{
+  document.getElementById('accountSub').textContent = 'Hola, ' + currentUser + '. Aquí están tus datos guardados.';
+  const box = document.getElementById('savedMeasuresBox');
+  if(savedMeasures){
+    box.innerHTML = `<div class="measure-chips">
+      <span class="measure-chip">Pecho/busto: ${savedMeasures.pecho} cm</span>
+      <span class="measure-chip">Cintura: ${savedMeasures.cintura} cm</span>
+      <span class="measure-chip">Cadera: ${savedMeasures.cadera} cm</span>
+      <span class="measure-chip">Largo: ${savedMeasures.largo} cm</span>
+    </div>`;
+  } else {
+    box.innerHTML = `<p class="account-empty">Todavía no has guardado medidas. Personaliza un traje y marca "Guardar estas medidas en mi perfil".</p>`;
+  }
+});
+
+/* ---------------- MODAL HELPERS ---------------- */
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(ov=>{
+  ov.addEventListener('click', (e)=>{ if(e.target === ov) closeModal(ov.id); });
+});
+
+/* ---------------- INIT ---------------- */
+renderGrid();
+renderCart();
+</script>
+
+</body>
+</html>
